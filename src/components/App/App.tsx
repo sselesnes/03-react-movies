@@ -2,10 +2,11 @@ import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import styles from "./App.module.css";
 import SearchBar from "../SearchBar/SearchBar";
-import { fetchMovies } from "../api/tmdb-api";
+import { fetchMovies } from "../api/tmdb";
 import MovieGrid from "../MovieGrid/MovieGrid";
 import Loader from "../Loader/Loader";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import MovieModal from "../MovieModal/MovieModal";
 import type { Movie } from "../../types/movie";
 
 export default function App() {
@@ -15,6 +16,7 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [queryFromSearchBar, setQueryFromSearchBar] = useState("");
+  const [selectedMovie, setSelectedMovie] = useState<null | Movie>(null);
   const handleSearch = async (query: string, page: number = 1) => {
     if (!query.trim()) return;
 
@@ -48,9 +50,12 @@ export default function App() {
     setCurrentPage(1);
     handleSearch(query, 1);
   };
-
   const handleMovieSelect = (movie: Movie) => {
-    console.log(movie.title, "card clicked");
+    setSelectedMovie(movie);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedMovie(null);
   };
 
   return (
@@ -84,6 +89,7 @@ export default function App() {
           </button>
         </div>
       )}
+      {selectedMovie && <MovieModal movie={selectedMovie} onClose={handleCloseModal} />}
       <Toaster
         position="top-center"
         toastOptions={{
