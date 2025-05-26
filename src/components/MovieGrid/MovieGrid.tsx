@@ -1,10 +1,5 @@
 import styles from "./MovieGrid.module.css";
-import type { Movie } from "../../types/movie";
-
-interface MovieGridProps {
-  movies: Movie[];
-  onSelect: (movie: Movie) => void;
-}
+import type { MovieGridProps } from "../../types/movie";
 
 export default function MovieGrid({ movies, onSelect }: MovieGridProps) {
   return (
@@ -14,7 +9,11 @@ export default function MovieGrid({ movies, onSelect }: MovieGridProps) {
           <div className={styles.card}>
             <img
               className={styles.image}
-              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+              src={
+                movie.poster_path
+                  ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                  : "https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg"
+              }
               alt={movie.title}
               loading="lazy"
             />

@@ -1,12 +1,6 @@
-// MovieModal.tsx
 import { useEffect } from "react";
 import styles from "./MovieModal.module.css";
-import type { Movie } from "../../types/movie";
-
-interface MovieModalProps {
-  movie: Movie;
-  onClose: () => void;
-}
+import type { MovieModalProps } from "../../types/movie";
 
 export default function MovieModal({ movie, onClose }: MovieModalProps) {
   useEffect(() => {
@@ -35,7 +29,7 @@ export default function MovieModal({ movie, onClose }: MovieModalProps) {
     ? `https://image.tmdb.org/t/p/original${movie.backdrop_path}`
     : movie.poster_path
     ? `https://image.tmdb.org/t/p/original${movie.poster_path}`
-    : "/path/to/fallback-image.jpg";
+    : "https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg";
 
   return (
     <div
@@ -51,9 +45,9 @@ export default function MovieModal({ movie, onClose }: MovieModalProps) {
         <img src={imageSrc} alt={movie.title} className={styles.image} />
         <div className={styles.content}>
           <h2>{movie.title}</h2>
-          <p>{movie.overview || "Опис відсутній."}</p>
+          <p>{movie.overview || "No description"}</p>
           <p>
-            <strong>Release Date:</strong> {movie.release_date || "Невідомо"}
+            <strong>Release Date:</strong> {movie.release_date || "Unknown"}
           </p>
           <p>
             <strong>Rating:</strong> {movie.vote_average}/10

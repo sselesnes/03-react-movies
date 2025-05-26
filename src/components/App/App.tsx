@@ -17,6 +17,7 @@ export default function App() {
   const [error, setError] = useState<string | null>(null);
   const [queryFromSearchBar, setQueryFromSearchBar] = useState("");
   const [selectedMovie, setSelectedMovie] = useState<null | Movie>(null);
+
   const handleSearch = async (query: string, page: number = 1) => {
     if (!query.trim()) return;
 
@@ -50,6 +51,7 @@ export default function App() {
     setCurrentPage(1);
     handleSearch(query, 1);
   };
+
   const handleMovieSelect = (movie: Movie) => {
     setSelectedMovie(movie);
   };
