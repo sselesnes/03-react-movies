@@ -25,6 +25,7 @@ export default function App() {
     setError(null);
     try {
       const fetchResult = await fetchMovies({ query, page });
+      console.log(fetchResult.results);
       setMovies(fetchResult.results);
       setTotalPages(fetchResult.total_pages);
       if (fetchResult.results.length === 0) {
